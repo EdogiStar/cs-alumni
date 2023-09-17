@@ -1,5 +1,13 @@
 <?php
   include 'includes/autoLoader.php';
+    session_start();
+  if (isset($_SESSION['userID'])) {
+
+    $userID = $_SESSION['userID'];
+
+  }else{
+    header("location: index.php");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

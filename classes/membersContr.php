@@ -18,6 +18,24 @@
 			$this->grad_yr = $grad_yr;
 		}
 
+		
+		public function completeReg($firstname, $othername, $email, $phone, $password, $token) {
+			if (empty($firstname) || empty($email) || empty($phone) || empty($password)) {
+				$error = 'All Fields Are Required';
+				header('location: ../senate_list.php?error='.$error);
+				exit();
+			}
+
+			$result = $this->completeRegistration($firstname, $othername, $email, $phone, $password, $token);
+				$success = 'Registration Successful';
+				header('location: ../login.php?success='.$success);
+				exit();
+			}else{
+				$error = 'Registration Failed, try again';
+				header('location: ../senate_list.php?error='.$error);
+				exit();
+			}
+		}
 
 		public function updateMember($token) {
 
@@ -31,6 +49,31 @@
 				header('location: ../admin/members.php?error='.$error);
 				exit();
 			}
+		}
+		
+		public function checkSenateList() {
+			if ($this->checkList($this->surname, $this->matNo, $this->dob) == false) {
+				// No Record Found
+				$error = 'No Record Found';
+				header('location: ../senate_list.php?error='.$error);
+				exit();	
+			}else{
+				// Record Found, get record
+				$getRecord = $this->getRecord($this->surname, $this->matNo, $this->dob);
+				if ($getRecord['status'] == 0) {
+					// enrolled and eligible to register
+					// pass matNo
+					$matNo = md5($getRecord['matNo']);
+					header('location: ../register.php?token='.$matNo);
+					exit();
+				}else{
+					// activated and cant register again
+					$error = 'User Exists, Please Login';
+					header('location: ../senate_list.php?error='.$error);
+					exit();	
+				}
+			}
+			return $result;
 		}
 
 		public function showMemberRecord($token) {

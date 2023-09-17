@@ -1,13 +1,17 @@
-<section class="probootstrap-cta">
+ <?php
+    if (!isset($_SESSION['userID'])) {
+      echo '<section class="probootstrap-cta">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <h2 class="probootstrap-animate" data-animate-effect="fadeInRight">Take Action Now, JOIN For Free!</h2>
-              <a href="register.php" role="button" class="btn btn-primary btn-lg btn-ghost probootstrap-animate" data-animate-effect="fadeInLeft">Enroll</a>
+              <a href="senate_list.php" role="button" class="btn btn-primary btn-lg btn-ghost probootstrap-animate" data-animate-effect="fadeInLeft">Enroll</a>
             </div>
           </div>
         </div>
-      </section>
+      </section>';
+    }
+?>
 <footer class="probootstrap-footer probootstrap-bg">
         <div class="container">
           <div class="row">
@@ -33,11 +37,29 @@
               <div class="probootstrap-footer-widget">
                 <h3>Links</h3>
                 <ul>
-                  <li><a href="index.php">Home</a></li>
-                  <li><a href="members.php">Members</a></li>
-                  <li><a href="about.php">About</a></li>
-                  <li><a href="news.php">News</a></li>
-                  <li><a href="contact.php">Contact</a></li>
+                   <li class="active"><a href="index.php">Home</a></li>
+                    <li><a href="about.php">About Us</a></li>
+                    <?php
+                        if (isset($_SESSION['userID'])) {
+
+                          $userID = $_SESSION['userID'];
+                          echo '<li><a href="events.php">Events</a></li>
+                                  <li><a href="news.php">News</a></li>
+                                  <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="members.php">Members</a></li>
+                                      <li><a href="executives.php">Executives</a></li>
+                                      <li><a href="gallery.php">Gallery</a></li>
+                                      <li><a href="contact.php">Contact</a></li>
+                                    </ul>
+                                  </li>';
+
+                        }else{
+                          echo '<li><a href="senate_list.php">Register</a></li>
+                                <li><a href="login.php">Login</a></li>';
+                        }
+                    ?>
                 </ul>
               </div>
             </div>

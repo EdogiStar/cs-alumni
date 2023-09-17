@@ -41,6 +41,32 @@
 			$row = $stmt->rowCount();
 			return $results = $stmt->fetchAll();
 	    }
+	    
+	    protected function getUserLog($uId, $pwd){
+			$sql = 'SELECT * FROM members WHERE matNo = ? AND password = ? LIMIT 1';
+			$stmt = $this->connect()->prepare($sql);
+			$stmt->execute([$uId, $pwd]);
+			$row = $stmt->rowCount();
+			$results = $stmt->fetchAll();
+
+				if ($stmt->rowCount() == 0) {
+					$stmt=null;
+					$error = 'Wrong Username/Password Combination';
+					header('location: ../login.php?error='.$error);
+					exit();
+				}
+				
+				foreach ($results as $result) {
+					$user=$result['id'];
+				}
+				session_start();
+				$_SESSION['userID']=$user;
+				$stmt=null;
+				// $success = 'Logged in Successfully';
+				header('location: ../index.php');
+			}
+
+		
 
 		protected function getUser($uId, $pwd){
 			
@@ -65,7 +91,7 @@
 				$stmt=null;
 				// $success = 'Logged in Successfully';
 				header('location: ../admin/dashboard.php');
-			}
+			}//geUser
 
-		}//geUser
+		}
 	// }

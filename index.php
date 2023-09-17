@@ -80,9 +80,9 @@
                   <h3>About CS ALUMNI IBBUL</h3>
                   <?php
                       $aboutObj = new AboutView();
-                      $aboutObj->showUserAbout();
+                      $aboutObj->showUserAbout2();
                   ?>
-                  <p><a href="about.php" class="btn btn-primary">Learn More</a></p>
+                  <!-- <p><a href="about.php" class="btn btn-primary">Learn More</a></p> -->
                 </div>
                 <div class="probootstrap-image probootstrap-animate" style="background-image: url(img/IBBUL1.jpg)">
                   <a href="https://vimeo.com/45830194" class="btn-video popup-vimeo"><i class="icon-play3"></i></a>
@@ -177,11 +177,16 @@
                     </div>
                   </div>
                   <!-- END row -->
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <p><a href="news.php" class="btn btn-primary">View all news</a></p>  
-                    </div>
-                  </div>
+                   <?php
+                    if (isset($_SESSION['userID'])) {
+                      echo '<div class="row">
+                            <div class="col-md-12 text-center">
+                              <p><a href="news.php" class="btn btn-primary">View all news</a></p>  
+                            </div>
+                          </div>';
+                    }
+                  ?>
+                  
                 </div>
 
                 <!-- ///////////// NEWS ////////////////////// -->
@@ -198,11 +203,15 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <p><a href="events" class="btn btn-primary">View all events</a></p>  
-                    </div>
-                  </div>
+                  <?php
+                    if (isset($_SESSION['userID'])) {
+                      echo '<div class="row">
+                            <div class="col-md-12 text-center">
+                              <p><a href="events" class="btn btn-primary">View all events</a></p>  
+                            </div>
+                          </div>';
+                    }
+                  ?>
                 </div>
 
                 <!-- /////////////// EVENTS /////////////////// -->

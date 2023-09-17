@@ -14,7 +14,14 @@
 			$this->password = $password;
 		}
 
-		
+		public function checkUserLogin() {
+			if ($this->emptyInputs() == false) {
+				$error = 'All fields are required';
+				header('location: ../login.php?error='.$error);
+				exit();
+			}
+			$status = $this->getUserLog($this->email, $this->password);
+		}
 
 		public function checkUser() {
 			if ($this->emptyInputs() == false) {

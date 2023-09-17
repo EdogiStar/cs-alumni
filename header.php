@@ -42,25 +42,33 @@
             </button>
             <a class="navbar-brand" href="index.php" title="CS ALUMNI IBBUL">CS ALUMNI IBBUL</a>
           </div>
-
           <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+              
               <li class="active"><a href="index.php">Home</a></li>
-              <li><a href="events.php">Events</a></li>
-              <li><a href="news.php">News</a></li>
-              <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
-                <ul class="dropdown-menu">
-                  <li><a href="members.php">Members</a></li>
-                  <li><a href="executives.php">Executives</a></li>
-                  <li><a href="gallery.php">Gallery</a></li>
-                </ul>
-              </li>
               <li><a href="about.php">About Us</a></li>
-              <li><a href="contact.php">Contact</a></li>
+              <?php
+                  if (isset($_SESSION['userID'])) {
 
-              <li><a href="register.php">Register</a></li>
-              <li><a href="login.php">Login</a></li>
+                    $userID = $_SESSION['userID'];
+                    echo '<li><a href="events.php">Events</a></li>
+                            <li><a href="news.php">News</a></li>
+                            <li class="dropdown">
+                              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="members.php">Members</a></li>
+                                <li><a href="executives.php">Executives</a></li>
+                                <li><a href="gallery.php">Gallery</a></li>
+                                <li><a href="contact.php">Contact</a></li>
+                              </ul>
+                            </li>
+                            <li class=""><a href="includes/user_logout.php">LogOut</a></li>';
+
+                  }else{
+                    echo '<li><a href="senate_list.php">Register</a></li>
+                          <li><a href="login.php">Login</a></li>';
+                  }
+              ?>
             </ul>
           </div>
         </div>

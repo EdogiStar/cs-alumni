@@ -1,8 +1,12 @@
 <?php 
 
 	class MembersView extends Members {
-
 		
+		public function showMember($token) {
+			$result = $this->showMemberByMatNo($token);
+			return $result;
+		}
+
 		public function showMenuPortfolio() {
 			$results = $this->getAllPortfolio();
 			foreach ($results as $result) {
